@@ -48,27 +48,33 @@ function jump(){
 }
 
 function generateObstacles(){
-    //cactus en dehors de la grille
-    let obstaclePosition = 1000;
-    const obstacle = document.createElement('div');
-    obstacle.classList.add('obstacles');
-    grid.appendChild(obstacle);
-    obstacle.style.left = obstaclePosition + 'px'
-
-    //setInterval déplace l'obstacle => mouvement continu, si l'obstacle sors de l'écran => GAME OVER, tous les éléments du grid supprimés
-    let timerId = setInterval(() => {
-        if(obstaclePosition > 0 && obstaclePosition < 60 && position < 60){
-            clearInterval(timerId);
-            alert.innerHTML = ' Game Over'
-            isGameOver = true
-            //remove all children
-            while (grid.firstChild) {
-                grid.removeChild(grid.lastChild);
-            }
-        }
-        obstaclePosition -=10;
+    if(!isGameOver){ //cactus en dehors de la grille
+        let randomTime = Math.floor(Math.random()*4000);
+        let obstaclePosition = 1000;
+        const obstacle = document.createElement('div');
+        obstacle.classList.add('obstacles');
+        grid.appendChild(obstacle);
         obstacle.style.left = obstaclePosition + 'px'
-    },20)
-}
+
+        //setInterval déplace l'obstacle => mouvement continu, si l'obstacle sors de l'écran => GAME OVER, tous les éléments du grid supprimés
+        let timerId = setInterval(() => {
+            if(obstaclePosition > 0 && obstaclePosition < 60 && position < 60){
+                clearInterval(timerId);
+                alert.innerHTML = ' Game Over'
+                isGameOver = true
+                //remove all children
+                while (grid.firstChild) {
+                    grid.removeChild(grid.lastChild);
+                }
+            }
+            obstaclePosition -=10;
+            obstacle.style.left = obstaclePosition + 'px'
+        },20)
+        setTimeout(generateObstacles, randomTime);
+    }}
+
+
+
+
 generateObstacles()
 document.addEventListener('keyup', control);
