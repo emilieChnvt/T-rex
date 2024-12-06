@@ -1,8 +1,10 @@
 const dino =document.querySelector('.dino');
 const grid = document.querySelector('.grid');
+const alert = document.querySelector('#alert');
 let position = 0;
 let gravity = 0.9
 let isJumping = false;
+let isGameOver = false;
 
 // dino jump
 function control(e){
@@ -44,4 +46,29 @@ function jump(){
 
     }, 20)
 }
+
+function generateObstacles(){
+    //cactus en dehors de la grille
+    let obstaclePosition = 1000;
+    const obstacle = document.createElement('div');
+    obstacle.classList.add('obstacles');
+    grid.appendChild(obstacle);
+    obstacle.style.left = obstaclePosition + 'px'
+
+    //setInterval déplace l'obstacle => mouvement continu, si l'obstacle sors de l'écran => GAME OVER, tous les éléments du grid supprimés
+    let timerId = setInterval(() => {
+        if(obstaclePosition > 0 && obstaclePosition < 60 && position < 60){
+            clearInterval(timerId);
+            alert.innerHTML = ' Game Over'
+            isGameOver = true
+            //remove all children
+            while (grid.firstChild) {
+                grid.removeChild(grid.lastChild);
+            }
+        }
+        obstaclePosition -=10;
+        obstacle.style.left = obstaclePosition + 'px'
+    },20)
+}
+generateObstacles()
 document.addEventListener('keyup', control);
