@@ -9,4 +9,6 @@
     background-image: url('../images/dino.png');
     height:80px;
     width:80px;
+    position: absolute;
+    bottom:0;
 }
