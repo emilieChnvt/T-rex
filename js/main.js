@@ -2,8 +2,9 @@ const dino =document.querySelector('.dino');
 const grid = document.querySelector('.grid');
 const alert = document.querySelector('#alert');
 const scoreDiv = document.querySelector('#score');
+let score = 0;
 let position = 0;
-let gravity = 0.9
+let gravity = 0.9;
 let isJumping = false;
 let isGameOver = false;
 
@@ -20,7 +21,7 @@ function jump(){
     isJumping = true;
     //how dino move upe/
     let count = 0;
-    let score = 0;
+
     // permet de découper le mouyvement en petites étapes, ce qui donne l'illusion d'un mouvement continu
     let timerId = setInterval(() => {
 
@@ -71,7 +72,11 @@ function generateObstacles(){
                 }
             }
             obstaclePosition -=10;
-            obstacle.style.left = obstaclePosition + 'px'
+            obstacle.style.left = obstaclePosition + 'px';
+            if(obstaclePosition<0){
+                score++;
+                scoreDiv.innerHTML=`Score: ${score}`;
+            }
         },20)
         setTimeout(generateObstacles, randomTime);
     }}
