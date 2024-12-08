@@ -71,17 +71,22 @@ function generateObstacles(){
                 clearInterval(timerId);
                 alert.innerHTML = ' Game Over'
                 isGameOver = true
+                score = 0;
+                scoreDiv.innerHTML=`Score: ${score}`;
                 //remove all children
                 while (grid.firstChild) {
                     grid.removeChild(grid.lastChild);
                 }
+                return
             }
             obstaclePosition -=10;
             obstacle.style.left = obstaclePosition + 'px';
-            if(obstaclePosition<0){
+            if(obstaclePosition< -60){
+
+                clearInterval(timerId);
+                obstacle.remove();
                 score++;
                 scoreDiv.innerHTML=`Score: ${score}`;
-                clearInterval(timerId);
             }
         },20)
         setTimeout(generateObstacles, randomTime);
