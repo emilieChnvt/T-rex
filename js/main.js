@@ -76,6 +76,7 @@ function generateObstacles(){
             if(obstaclePosition<0){
                 score++;
                 scoreDiv.innerHTML=`Score: ${score}`;
+                clearInterval(timerId);
             }
         },20)
         setTimeout(generateObstacles, randomTime);
