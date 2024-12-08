@@ -92,8 +92,5 @@ function generateObstacles(){
         setTimeout(generateObstacles, randomTime);
     }}
 
-
-
-
 generateObstacles()
 document.addEventListener('keyup', control);
