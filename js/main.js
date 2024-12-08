@@ -54,11 +54,16 @@ function jump(){
 function generateObstacles(){
     if(!isGameOver){ //cactus en dehors de la grille
         let randomTime = Math.floor(Math.random()*4000);
-        let obstaclePosition = 1000;
+        let obstaclePosition = window.innerWidth; // commence l'obstacle hors de l'écran
         const obstacle = document.createElement('div');
         obstacle.classList.add('obstacles');
         grid.appendChild(obstacle);
         obstacle.style.left = obstaclePosition + 'px'
+
+        //positionner l'obstacle
+        obstacle.style.position = 'absolute';
+        obstacle.style.bottom = '0px';
+        obstacle.style.left = obstaclePosition + 'px';
 
         //setInterval déplace l'obstacle => mouvement continu, si l'obstacle sors de l'écran => GAME OVER, tous les éléments du grid supprimés
         let timerId = setInterval(() => {
