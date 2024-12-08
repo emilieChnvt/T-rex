@@ -1,6 +1,7 @@
 const dino =document.querySelector('.dino');
 const grid = document.querySelector('.grid');
 const alert = document.querySelector('#alert');
+const scoreDiv = document.querySelector('#score');
 let position = 0;
 let gravity = 0.9
 let isJumping = false;
@@ -18,7 +19,8 @@ function control(e){
 function jump(){
     isJumping = true;
     //how dino move upe/
-    let count = 0
+    let count = 0;
+    let score = 0;
     // permet de découper le mouyvement en petites étapes, ce qui donne l'illusion d'un mouvement continu
     let timerId = setInterval(() => {
 
@@ -35,6 +37,7 @@ function jump(){
                 count--;
                 position = position * gravity;
                 dino.style.bottom =  position + 'px';
+
             }, 20)
         }
 
